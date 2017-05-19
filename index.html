@@ -1,0 +1,178 @@
+<!Doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Gem Stones</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+<h1>Gems for Days</h1>
+
+<p>
+	
+	You will be given a random number at the start of the game.
+	
+	<br></br>
+
+	There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score. 	
+
+	<br></br>
+
+	You win the game by matching your total score to random number, you lose the game if your total score goes above the random number. 
+
+	<br></br>
+
+	The value of each crystal in hidden from you until you click on it. 
+
+	<br></br>
+
+	Each time when the game starts, the game will schange the value of each crystal. 
+
+</p>
+
+
+
+<p id= "Wins">Wins: </p>
+<p id= "Losses">Losses: </p>
+
+<div>
+
+	<p id="Target">Target: </p>
+
+</div>
+
+<div>
+
+	<button id="blue"> 
+
+		<img src="images/diamond.png" ALT="Diamond pic" width=" 64" height="64">
+
+	</button>
+
+</div>
+
+<div>
+
+	<button id="green"> 
+
+		<img src="images/emerald.png" ALT="emerald pic" width=" 64" height="64">
+
+	</button>
+
+</div>
+
+<div>
+
+	<button id="red"> 
+
+		<img src="images/ruby.png" ALT="ruby pic" width=" 64" height="64">
+
+	</button>
+
+</div>
+
+<div>
+
+	<button id="yellow"> 
+
+		<img src="images/yellow diamond.png" ALT="yellow diamond pic" width=" 64" height="64">
+
+	</button>
+
+</div>
+
+<p id="currentScore">Your Score is: </p>
+
+<script>
+
+		$(document).ready(function(){
+
+		var red = Math.floor(Math.random() * 12) + 1;
+		var blue = Math.floor(Math.random() * 12) + 1;
+		var yellow = Math.floor(Math.random() * 12) + 1;
+		var green = Math.floor(Math.random() * 12) + 1;
+
+		var Wins = 0;
+		var Losses = 0;
+
+		var currentScore = 0;
+
+		var Target = Math.floor(Math.random() * 120) + 19;
+
+		var updatecurrentScore = function(){
+
+			$("#currentScore").empty();
+			$("#currentScore").append(Your Score is);
+			$("#Wins").empty();
+			$("#Wins").append(Wins);
+			$("#Losses").empty();
+			$("#Losses").append(Losses);
+		
+		};
+		
+		var restart = function(){
+			currentScore = 0;
+    		Target = Math.floor((Math.random()* 100) + 19);
+
+				$('#Target').empty();
+				$('#Target').append(Target);
+
+				red = Math.floor((Math.random()* 12) + 1);
+    			blue = Math.floor((Math.random()* 12) + 1);
+    			yellow = Math.floor((Math.random()* 12) + 1);
+    			green = Math.floor((Math.random()* 12) + 1);
+    
+        updatecurrentScore();
+
+		};
+
+	var gamestart = function (){
+	
+	if (Target == currentScore) {
+		Wins = Wins + 1;
+		restart();
+
+	}
+
+	else if(Target > currentScore){
+		Losses = Losses + 1;
+		restart();
+
+	}
+
+	else	{
+
+		updatecurrentScore();
+	}
+};
+
+	$("#Target").append(Target);
+
+	$("#currentScore").append(currentScore);
+
+
+
+	$("#red").click(function(){
+		currentScore = currentScore + red;
+		gamestart();
+	});
+	$("#blue").click(function(){
+		currentScore = currentScore + blue;
+		gamestart();
+	});
+	$("#yellow").click(function(){
+		currentScore = currentScore + yellow;
+		gamestart();
+	});
+	$("#green").click(function(){
+		currentScore = currentScore + green;
+		gamestart();
+	});
+
+
+});
+</script>
+
+</body>
+</html>
